@@ -31,15 +31,22 @@ User_route.post(
         if (err) {
           return err.message;
         }
-        const user = await RegisterDB.create({
-          name: req.body.name,
-          email: req.body.email,
-          password: hash,
-        });
-        res.status(200).json({
-          status: "User Added",
-          user: user,
-        });
+        try {
+          const user = await RegisterDB.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: hash,
+          });
+          res.status(200).json({
+            status: "User Added",
+            user: user,
+          });
+        } catch (e) {
+          res.status(400).json({
+            status: "user not added",
+            message: e.message,
+          });
+        }
       });
     } catch (e) {
       res.status(400).json({

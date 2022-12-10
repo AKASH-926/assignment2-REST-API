@@ -11,7 +11,7 @@ mongoose.connect("mongodb://localhost/assignment", () => {
 const app = express();
 
 app.use(bodyparser.json());
-
+//======================================================================================================================
 app.use("/posts", async (req, res, next) => {
   // console.log(req.headers.authorization);
   if (req.headers.authorization) {
@@ -42,6 +42,7 @@ app.use("/posts", async (req, res, next) => {
     });
   }
 });
+//===============================================================================================================================
 app.use("/", User_route);
 app.use("/", Post_router);
 
